@@ -1,7 +1,6 @@
 import java.sql.*;
 import java.util.Scanner;
 
-// Model Class
 class Student {
     int studentID;
     String name;
@@ -16,7 +15,6 @@ class Student {
     }
 }
 
-// Controller Class
 class StudentController {
     private Connection conn;
 
@@ -66,7 +64,6 @@ class StudentController {
     }
 }
 
-// View and Main Application
 public class JDBCExample {
     private static final String URL = "jdbc:mysql://localhost:3306/yourDatabase";
     private static final String USER = "yourUsername";

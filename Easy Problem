@@ -1,24 +1,32 @@
-import java.sql.*;
+import java.util.*;
 
-public class JDBCExample {
+class Employee {
+    String name;
+    int age;
+    double salary;
+
+    public Employee(String name, int age, double salary) {
+        this.name = name;
+        this.age = age;
+        this.salary = salary;
+    }
+
+    @Override
+    public String toString() {
+        return name + " | Age: " + age + " | Salary: " + salary;
+    }
+}
+
+public class EmployeeSorter {
     public static void main(String[] args) {
-        String url = "jdbc:mysql://localhost:3306/yourDatabase";
-        String user = "yourUsername";
-        String password = "yourPassword";
-        
-        try (Connection conn = DriverManager.getConnection(url, user, password);
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery("SELECT EmpID, Name, Salary FROM Employee")) {
-            
-            System.out.println("EmpID\tName\tSalary");
-            while (rs.next()) {
-                int empID = rs.getInt("EmpID");
-                String name = rs.getString("Name");
-                double salary = rs.getDouble("Salary");
-                System.out.println(empID + "\t" + name + "\t" + salary);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        List<Employee> employees = Arrays.asList(
+            new Employee("Alice", 30, 50000),
+            new Employee("Bob", 25, 60000),
+            new Employee("Charlie", 35, 55000)
+        );
+
+        employees.sort((e1, e2) -> Double.compare(e1.salary, e2.salary));
+
+        employees.forEach(System.out::println);
     }
 }
